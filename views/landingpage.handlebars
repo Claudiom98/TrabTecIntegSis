@@ -1,0 +1,38 @@
+<script>
+
+
+let dados=[]
+
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function() {
+	dados = JSON.parse(xhttp.responseText);
+}
+xhttp.open("GET", "/dados");
+xhttp.send();
+
+
+
+
+window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Questao 1"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0\"\"escolhas",
+		indexLabel: "{label} {y}",
+		dataPoints: dados
+	}]
+});
+chart.render();
+
+}
+</script>
+
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<p id='dados'></p>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
